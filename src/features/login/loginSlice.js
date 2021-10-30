@@ -1,22 +1,22 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 
 const apiUrl = 'http://localhost:8000/'
 const token = localStorage.localJWT
 
 export const fetchAsyncLogin = createAsyncThunk('login/post', async (auth) => {
-  const res = await axios.post(`${apiUrl}authen/jwt/create`, auth, {
+  const res = await axios.post(`${apiUrl}authen/jwt/create/`, auth, {
     headers: {
-      ContentType: 'application/json',
+      'Content-Type': 'application/json',
     },
   })
   return res.data
 })
 
 export const fetchAsyncRegister = createAsyncThunk('login/register', async (auth) => {
-  const res = await axios.post(`${apiUrl}api/register`, auth, {
+  const res = await axios.post(`${apiUrl}api/register/`, auth, {
     headers: {
-      ContentType: 'application/json',
+      'Content-Type': 'application/json',
     },
   })
   return res.data
@@ -67,7 +67,7 @@ const loginSlice = createSlice({
 })
 
 export const { editUsername, editPassword, toggleMode } = loginSlice.actions
-export const selectAuth = (state) => state.loginSlice.auth
+export const selectAuth = (state) => state.login.auth
 export const selectIsLoginView = (state) => state.login.isLoginView
 export const selectProfile = (state) => state.login.profile
 
