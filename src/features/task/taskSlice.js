@@ -24,7 +24,7 @@ export const fetchAsyncCreate = createAsyncThunk('task/post', async (task) => {
 })
 
 export const fetchAsyncUpdate = createAsyncThunk('task/put', async (task) => {
-  const res = await axios.post(`${apiUrl}${task.id}/`, task, {
+  const res = await axios.put(`${apiUrl}${task.id}/`, task, {
     headers: {
       'Content-Type': 'application/json',
       Authorization: `JWT ${token}`,
@@ -69,23 +69,23 @@ const taskSlice = createSlice({
   },
   reducers: {
     editTask(state, action) {
-      state.selectedTasks = action.payload
+      state.editedTask = action.payload
     },
-    selectedTasks(state, action) {
-      state.selectedTasks = action.payload
+    selectTask(state, action) {
+      state.selectedTask = action.payload
     },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchAsyncGet.fulfilled, (state, action) => {
       return {
         ...state,
-        task: action.payload,
+        tasks: action.payload,
       }
     })
     builder.addCase(fetchAsyncCreate.fulfilled, (state, action) => {
       return {
         ...state,
-        task: [action.payload, ...state.tasks],
+        tasks: [action.payload, ...state.tasks],
       }
     })
     builder.addCase(fetchAsyncUpdate.fulfilled, (state, action) => {
