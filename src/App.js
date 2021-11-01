@@ -4,6 +4,7 @@ import styles from './App.module.css'
 import { FaSignInAlt } from 'react-icons/fa'
 import TaskList from './features/task/TaskList'
 import TaskDetails from './features/task/TaskDetails'
+import TaskInput from './features/task/TaskInput'
 
 const App = () => {
   const logout = () => {
@@ -17,6 +18,7 @@ const App = () => {
         <button onClick={logout} className={styles.signBtn}>
           <FaSignInAlt />
         </button>
+        <TaskInput />
         <TaskList />
       </div>
       <div className={styles.appDetails}>
